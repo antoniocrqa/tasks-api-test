@@ -48,4 +48,17 @@ public class APITest {
 			.body("message", CoreMatchers.is("Due date must not be in past"))
 		;
 	}
+
+	@Test
+	public void naoDeveAdicionarTarefaInvalida2Teste() {
+		RestAssured.given()
+				.body("{\"task\": \"Teste via API\", \"dueDate\": \"2020-03-30\"}")
+				.contentType(ContentType.JSON)
+				.when()
+				.post("/todo")
+				.then()
+				.statusCode(400)
+				.body("message", CoreMatchers.is("Due date must not be in past"))
+		;
+	}
 }
